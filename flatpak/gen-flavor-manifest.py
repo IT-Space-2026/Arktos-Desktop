@@ -10,7 +10,7 @@ QtWebEngine-only sibling so both flavors can be installed side-by-side:
 
 Transformations applied:
   * app-id -> com.arktos_browser.ArktosNoServo
-  * sdk-extensions: drop org.freedesktop.Sdk.Extension.llvm21 (only
+  * sdk-extensions: drop org.freedesktop.Sdk.Extension.llvm22 (only
     servo-embed's mozjs-sys bindgen needs clang/libclang)
   * modules: drop the servo-embed module entirely (its ~700-crate
     build, vendored cargo-sources-servo.json fragment and /app/lib

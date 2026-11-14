@@ -14,7 +14,7 @@
 #
 # Rust crates (src/rustdl, src/rustcore, src/adblock/rust and
 # spikes/servo/servo-embed) are built inside the SDK via the freedesktop
-# rust-stable SDK extension; org.freedesktop.Sdk.Extension.llvm21 feeds
+# rust-stable SDK extension; org.freedesktop.Sdk.Extension.llvm22 feeds
 # clang/libclang to mozjs-sys's bindgen (SRV01).
 # flatpak/cargo-sources.json (arktos module) and
 # flatpak/cargo-sources-servo.json (servo-embed module) vendor every
@@ -65,7 +65,7 @@ base-version: '6.11'
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.rust-stable
   # clang + libclang for mozjs-sys's bindgen (servo-embed module)
-  - org.freedesktop.Sdk.Extension.llvm21
+  - org.freedesktop.Sdk.Extension.llvm22
 command: arktos
 rename-desktop-file: arktos.desktop
 rename-icon: arktos
@@ -107,13 +107,13 @@ modules:
     only-arches:
       - x86_64
     build-options:
-      append-path: /usr/lib/sdk/llvm21/bin
+      append-path: /usr/lib/sdk/llvm22/bin
       env:
         # the top-level CARGO_HOME is keyed to the arktos module dir —
         # keep this module's cargo state in its own build dir
         CARGO_HOME: cargo-home
-        # mozjs-sys bindgen finds libclang here (llvm21 SDK ext)
-        LIBCLANG_PATH: /usr/lib/sdk/llvm21/lib
+        # mozjs-sys bindgen finds libclang here (llvm22 SDK ext)
+        LIBCLANG_PATH: /usr/lib/sdk/llvm22/lib
     build-commands:
       # The crate's .cargo/config.toml pins a machine-local lld wrapper —
       # override it for the in-tree script, same as the deb/rpm legs.

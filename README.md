@@ -1270,7 +1270,7 @@ backend crate has its own `flatpak/cargo-sources-servo.json` covering
 its crates.io deps plus the commit-pinned servo.git checkout). The
 `servo-embed` module compiles `libservo_embed.so` inside the SDK before
 the app module, so the flatpak build also carries the Servo engine —
-its source comes from the vendored crates plus the llvm21 SDK
+its source comes from the vendored crates plus the llvm22 SDK
 extension (clang/libclang for mozjs-sys bindgen). The tor
 expert bundle ships under `/app/lib/tor` so tor windows bootstrap inside
 the sandbox (no host tor needed). Permissions stay honest: ipc, network,
