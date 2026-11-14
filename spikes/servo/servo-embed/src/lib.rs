@@ -1,4 +1,4 @@
-/* ENG03 spike: minimal C ABI over libservo (servo v0.7.0, git-pinned).
+/* ENG03 spike: minimal C ABI over libservo (servo v0.8.0, git-pinned).
  *
  * Threading model: everything Servo-side happens on the calling
  * thread. The embedder's event loop is driven by `se_spin()`; Servo
@@ -126,6 +126,7 @@ impl WebViewDelegate for SeDelegate {
             LoadStatus::Started => 0,
             LoadStatus::HeadParsed => 1,
             LoadStatus::Complete => 2,
+            LoadStatus::Stopped => 3,
         };
         (self.shared.cbs.load_status_changed)(self.shared.cbs.userdata, code);
     }
@@ -211,7 +212,7 @@ impl WebViewDelegate for SeDelegate {
             ConsoleLogLevel::Info => 2,
             ConsoleLogLevel::Warn => 3,
             ConsoleLogLevel::Error => 4,
-            ConsoleLogLevel::Trace | ConsoleLogLevel::Dir => 1,
+            ConsoleLogLevel::Trace | ConsoleLogLevel::Dir | ConsoleLogLevel::Table => 1,
         };
         let cs = cstr(&message);
         (self.shared.cbs.console_message)(self.shared.cbs.userdata, code, cs.as_ptr());
@@ -288,7 +289,7 @@ type SeLoadGate =
 static LOAD_GATE: OnceLock<(usize, SeLoadGate)> = OnceLock::new();
 
 fn serve_host_reply(load: WebResourceLoad, reply: SeHostReply) {
-    let mut response = WebResourceResponse::new(load.request.url.clone());
+    let mut response = WebResourceResponse::new(load.request.url.clone().into_url());
     if reply.status > 0 {
         if let Ok(code) = StatusCode::from_u16(reply.status as u16) {
             response = response.status_code(code);
@@ -473,7 +474,7 @@ fn prebind_for_gl(rc: &Rc<dyn RenderingContext>, tag: &str) {
     }
 }
 
-// ENG12/ENG28: libservo v0.7.0 parks Opts in a process-global
+// ENG12/ENG28: libservo v0.8.0 parks Opts in a process-global
 // OnceLock — the first Servo build wins, every later
 // ServoBuilder::build panics "Already initialized"
 // (components/config/opts.rs), and a panic may not unwind across an
@@ -900,7 +901,7 @@ fn se_view_create_inner(
         }))
         .build();
 
-    // v0.7.0 WebViews are registered hidden; a hidden webview still
+    // v0.8.0 WebViews are registered hidden; a hidden webview still
     // loads in the embedder tests, but show() is the documented path
     // for a visible view inside its RenderingContext.
     webview.show();
@@ -1273,7 +1274,7 @@ pub extern "C" fn se_gl_renderer(instance: *mut SeInstance) -> *const c_char {
     })
 }
 
-/// ENG11: report the linked libservo version ("0.7.0"), parsed out of
+/// ENG11: report the linked libservo version ("0.8.0"), parsed out of
 /// the engine's own user-agent product token so the string always
 /// tracks the pinned `servo` dependency — never nullptr, an
 /// unrecognized UA yields "unknown". The returned pointer borrows a

@@ -811,8 +811,9 @@ void ServoView::setTitle(const QString &title)
 
 void ServoView::onLoadStatus(int status)
 {
-    // SeCallbacks: 0 Started, 1 HeadParsed, 2 Complete — the only
-    // progress signal the shim surfaces, so the bar interpolates.
+    // SeCallbacks: 0 Started, 1 HeadParsed, 2 Complete, 3 Stopped —
+    // the only progress signal the shim surfaces, so the bar
+    // interpolates.
     if (status == 0) {
         m_loading = true;
         emit loadStarted();
@@ -823,6 +824,10 @@ void ServoView::onLoadStatus(int status)
         m_loading = false;
         emit loadProgress(100);
         emit loadFinished(true);
+    } else if (status == 3) {
+        m_loading = false;
+        emit loadProgress(100);
+        emit loadFinished(false);
     }
 }
 

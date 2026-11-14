@@ -21,7 +21,7 @@ typedef struct SeCallbacks {
     void (*frame_ready)(void *userdata);          /* GUI thread */
     void (*url_changed)(void *userdata, const char *url);
     void (*title_changed)(void *userdata, const char *title);
-    void (*load_status_changed)(void *userdata, int status); /* 0 Started 1 HeadParsed 2 Complete */
+    void (*load_status_changed)(void *userdata, int status); /* 0 Started 1 HeadParsed 2 Complete 3 Stopped */
     void (*console_message)(void *userdata, int level, const char *message);
     void (*navigation_request)(void *userdata, const char *url);
     void (*resource_load)(void *userdata, const char *method_and_url);
@@ -93,7 +93,7 @@ void se_set_zoom(SeInstance instance, float zoom);
 void se_eval_js(SeInstance instance, const char *script);
 int se_frame_size(SeInstance instance, unsigned *width, unsigned *height);
 long se_frame_copy(SeInstance instance, unsigned char *buf, unsigned long buf_len);
-/* ENG11: linked libservo version string ("0.7.0") — process-lifetime
+/* ENG11: linked libservo version string ("0.8.0") — process-lifetime
  * static, do not free. Never NULL; "unknown" if unparseable. */
 const char *se_version(void);
 
