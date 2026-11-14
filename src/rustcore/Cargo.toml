@@ -144,7 +144,7 @@ safelog = { version = "=0.10.1", optional = true }
 # confined worker instead).  `embed-fonts` bundles the 14 base-font
 # substitutes so the renderer needs no font filesystem inside the
 # sandbox.  Exact-pinned like the rest of the reviewed tree.
-hayro = { version = "=0.8.0", features = ["embed-fonts"] }
+hayro = { version = "=0.9.0", features = ["embed-fonts"] }
 tor-llcrypto = "=0.47.0"
 # Sync key rotation (SYNC09): the rekey wrap converts a member's
 # Ed25519 device pubkey to its Montgomery image — already pinned in
