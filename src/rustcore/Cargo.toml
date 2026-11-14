@@ -41,7 +41,7 @@ synclan = ["dep:quinn", "dep:socket2", "dep:tokio", "dep:futures"]
 aes-gcm = "=0.10.3"
 argon2 = "=0.5.3"
 zeroize = "=1.8.1"
-getrandom = "=0.2.15"
+getrandom = "=0.2.17"
 serde_json = "1.0.151"
 # Parser crate is exact-pinned too (SEC19): untrusted remote XML goes
 # through it, so a dep bump is a reviewed `cargo update`, never a
@@ -78,7 +78,7 @@ x509-parser = "=0.18.1"
 # HMAC-Skein-512 MACs share one hmac/digest trait universe with the
 # skein crate (digest 0.11 only); extverify's Sha256::digest use is
 # API-identical across the bump.
-sha2 = "=0.11.0"
+sha2 = "=0.11.1"
 miniz_oxide = "=0.8.9"
 # Profile vault (PVAULT01): chunked, password-sealed profile archives.
 # hmac supplies HMAC-SHA-512 (header + whole-payload MACs) and the
@@ -107,20 +107,20 @@ qrcodegen = "=1.8.0"
 # keeps the dir-cache sqlite bundled (no system -lsqlite3).  Exact-
 # pinned like the rest of the reviewed tree (SEC21); `experimental-api`
 # is required for the discovery-key and restricted-discovery surface.
-arti-client = { version = "=0.47.0", default-features = false,
+arti-client = { version = "=0.48.0", default-features = false,
     optional = true,
     features = ["tokio", "rustls", "static-sqlite", "keymgr",
                 "onion-service-client", "onion-service-service",
                 "restricted-discovery", "experimental-api"] }
-tor-hsservice = { version = "=0.47.0", optional = true,
+tor-hsservice = { version = "=0.48.0", optional = true,
     features = ["restricted-discovery", "experimental-api"] }
-tor-hscrypto = { version = "=0.47.0", optional = true }
-tor-keymgr = { version = "=0.47.0", optional = true, features = ["keymgr"] }
-tor-cell = { version = "=0.47.0", optional = true }
-tor-config = { version = "=0.47.0", optional = true }
-tor-config-path = { version = "=0.47.0", optional = true }
-tor-proto = { version = "=0.47.0", optional = true }
-tor-rtcompat = { version = "=0.47.0", optional = true,
+tor-hscrypto = { version = "=0.48.0", optional = true }
+tor-keymgr = { version = "=0.48.0", optional = true, features = ["keymgr"] }
+tor-cell = { version = "=0.48.0", optional = true }
+tor-config = { version = "=0.48.0", optional = true }
+tor-config-path = { version = "=0.48.0", optional = true }
+tor-proto = { version = "=0.48.0", optional = true }
+tor-rtcompat = { version = "=0.48.0", optional = true,
     features = ["tokio", "rustls"] }
 tokio = { version = "=1.54.1", optional = true,
     features = ["rt-multi-thread", "sync", "time", "macros", "io-util"] }
@@ -145,7 +145,7 @@ safelog = { version = "=0.10.1", optional = true }
 # substitutes so the renderer needs no font filesystem inside the
 # sandbox.  Exact-pinned like the rest of the reviewed tree.
 hayro = { version = "=0.9.0", features = ["embed-fonts"] }
-tor-llcrypto = "=0.47.0"
+tor-llcrypto = "=0.48.0"
 # Sync key rotation (SYNC09): the rekey wrap converts a member's
 # Ed25519 device pubkey to its Montgomery image — already pinned in
 # the committed lock via the Arti tree, so the dep adds no new
