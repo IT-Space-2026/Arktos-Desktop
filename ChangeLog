@@ -1,3 +1,21 @@
+1.4.3 — Dependency refresh
+- Bundled tor expert bundle 16.0 → 16.0.1 (16.0.2 ships Android
+  bundles only).
+- Embedded Arti client tree 0.47.0 → 0.48.0 across all ten pins —
+  getrandom and sha2 minimums raised to 0.2.17 / 0.11.1 to match.
+- Experimental Servo backend v0.7.0 → v0.8.0; the embed shim was
+  ported to the new API — request URLs arrive as ServoUrl, and the
+  new LoadStatus::Stopped surfaces through to the browser as an
+  unsuccessful load finish so a window.stop() can't wedge the
+  progress bar. ConsoleLogLevel::Table folds into debug.
+- adblock engine 0.13.3 → 0.13.5; safelog 0.10.0 → 0.10.1; hayro
+  PDF renderer 0.8.0 → 0.9.0. rusqlite stays at 0.40.2 — already
+  the newest inside arti's <0.41 range (one libsqlite3-sys per
+  graph).
+- Flatpak: mozjs-sys bindgen's clang/libclang now comes from the
+  llvm22 SDK extension (was llvm21); vendored crate manifests
+  regenerated for the new locks.
+
 1.4.2 — LAN sync fast path, sync scheduling + URL-bar icons
 - Sync scheduling: interval (1/5/15/30 min) + Sync Now button in
   Sync settings — exchange rounds dial paired members, and the

@@ -1,3 +1,9 @@
+Arktos 1.4.3 — dependency refresh.
+
+Maintenance release rolling the bundled components forward: tor expert bundle 16.0 → 16.0.1 (16.0.2 publishes Android bundles only), the embedded Arti client tree 0.47.0 → 0.48.0, the adblock engine 0.13.3 → 0.13.5, the hayro PDF renderer 0.8.0 → 0.9.0, and safelog 0.10.0 → 0.10.1 (rusqlite stays at 0.40.2 — already the newest inside Arti's <0.41 range). The experimental Servo backend moves to v0.8.0, with the embed shim ported to the new API surface — request URLs now arrive as ServoUrl, and the new LoadStatus::Stopped reports through as an unsuccessful load finish so a window.stop() can no longer wedge the progress bar; ConsoleLogLevel::Table folds into debug. Flatpak builds now take clang/libclang for mozjs-sys bindgen from the llvm22 SDK extension. Bundled tor expert bundle: 16.0.1.
+
+Experimental software, provided as is.
+
 Arktos 1.4.2 — LAN sync fast path and pastel URL-bar indicators.
 
 Sync pairing now starts its transport with backend "auto": the desktop announces over mDNS and listens on QUIC while the pair dialog is open, so same-network devices discover and dial it in a second or two with no Tor in the loop. Tor remains the fallback for remote networks — previously the dialog was tor-only, so LAN discovery never ran at all.
