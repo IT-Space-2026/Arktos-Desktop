@@ -79,7 +79,7 @@ QUrl UpdateChecker::defaultApiUrl()
 QUrl UpdateChecker::releasesPageUrl()
 {
     return QUrl(QLatin1String(
-        "https://github.com/IT-Space-2026/arktos/releases"));
+        "https://github.com/IT-Space-2026/Arktos-Desktop/releases"));
 }
 
 void UpdateChecker::setApiUrl(const QUrl &url)
